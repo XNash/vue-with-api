@@ -4,20 +4,16 @@ import router from "@/routes/index.js";
 
 export default {
   name: "AddUser",
-  props: {
-    user: {
-      type: Object,
-      required: false
-    }
-  },
   data() {
     return {
-      localUser: this.user ? {...this.user} : {name:'', email:'', password:''}
+      localUser: {id: '', name:'', email:'', password:''}
     }
   },
   methods: {
     handleAddUser() {
-      axios.post("http://127.0.0.1:3000/users", this.localUser).then((res) => {
+      this.localUser.id = this.id;
+      console.log(this.localUser.id )
+      axios.post("http://127.0.0.1:3000/users", this.localUser).then(() => {
         console.log("User added successfully")
         alert("New user added successfully")
         router.push("/list")

@@ -21,7 +21,7 @@ export default{
       })
     },
     async handleDeleteUser(id) {
-      await axios.delete(`http://127.0.0.1:3000/users/${id}`).then((res) => {
+      await axios.delete(`http://127.0.0.1:3000/users/${id}`).then(() => {
         console.log("user deleted successfully")
         this.getAllUsers()
       })
@@ -52,7 +52,7 @@ export default{
             <td>{{ user.name }}</td>
             <td>{{ user.email }}</td>
             <td>
-              <router-link to="/list/edit" class="btn btn-sm btn-primary">Edit</router-link>
+              <router-link :to="{name: 'EditUser', params: {id: user.id}}" class="btn btn-sm btn-primary">Edit</router-link>
               <button class="btn btn-sm btn-danger" style="margin-left: 2px;" @click="handleDeleteUser(user.id)">Delete</button>
             </td>
           </tr>
