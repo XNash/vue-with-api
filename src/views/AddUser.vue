@@ -6,13 +6,12 @@ export default {
   name: "AddUser",
   data() {
     return {
-      localUser: {id: '', name:'', email:'', password:''}
+      localUser: {id: '', name: '', email: '', password: ''}
     }
   },
   methods: {
     handleAddUser() {
-      this.localUser.id = this.id;
-      console.log(this.localUser.id )
+      console.log(this.localUser.id)
       axios.post("http://127.0.0.1:3000/users", this.localUser).then(() => {
         console.log("User added successfully")
         alert("New user added successfully")
@@ -20,24 +19,39 @@ export default {
       }).catch((err) => {
         console.log(err);
       })
+    },
+    async setUserId() {
+      let id = ''
+      await axios.get('http://127.0.0.1:3000/users')
+          .then((res) => {
+            id = parseInt(res.data.reverse()[0].id) + 1
+            console.log(`User id: ${res.data.reverse()[0].id}`)
+            this.localUser.id = id.toString()
+          })
     }
+  },
+  beforeMount() {
+    this.setUserId()
   }
 }
 </script>
 
 <template>
-<div class="container">
-  <h1>Add an user</h1>
-  <form @submit.prevent="handleAddUser">
-    <input v-model="localUser.name" type="text" class="input-group-text form-check-inline mb-3" style="width: 50%" placeholder="Enter your name" required />
-    <input v-model="localUser.email" type="text" class="input-group-text form-check-inline mb-3" style="width: 50%" placeholder="Enter your email" required />
-    <input v-model="localUser.password" type="password" minlength="8" class="input-group-text form-check-inline mb-3" style="width: 50%" placeholder="Enter your password" required />
+  <div class="container">
+    <h1>Add an user</h1>
+    <form @submit.prevent="handleAddUser">
+      <input v-model="localUser.name" type="text" class="input-group-text form-check-inline mb-3" style="width: 50%"
+             placeholder="Enter your name" required/>
+      <input v-model="localUser.email" type="text" class="input-group-text form-check-inline mb-3" style="width: 50%"
+             placeholder="Enter your email" required/>
+      <input v-model="localUser.password" type="password" minlength="8" class="input-group-text form-check-inline mb-3"
+             style="width: 50%" placeholder="Enter your password" required/>
 
-    <button type="submit" class="btn btn-success">Add new user</button>
-  </form>
+      <button type="submit" class="btn btn-success">Add new user</button>
+    </form>
 
 
-</div>
+  </div>
 </template>
 
 <style scoped>

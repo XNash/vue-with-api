@@ -70,7 +70,6 @@ export default{
   </div>
 </template>
 
-
 <style scoped>
   .btn {
     color: white;
