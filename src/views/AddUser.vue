@@ -2,6 +2,8 @@
 import axios from "axios";
 import router from "@/routes/index.js";
 
+const url = 'http://127.0.0.1:3000/users'
+
 export default {
   name: "AddUser",
   data() {
@@ -12,7 +14,7 @@ export default {
   methods: {
     handleAddUser() {
       console.log(this.localUser.id)
-      axios.post("http://127.0.0.1:3000/users", this.localUser).then(() => {
+      axios.post(`${url}/users`, this.localUser).then(() => {
         console.log("User added successfully")
         alert("New user added successfully")
         router.push("/list")
@@ -22,7 +24,7 @@ export default {
     },
     async setUserId() {
       let id = ''
-      await axios.get('http://127.0.0.1:3000/users')
+      await axios.get(`${url}/users`)
           .then((res) => {
             id = parseInt(res.data.reverse()[0].id) + 1
             console.log(`User id: ${res.data.reverse()[0].id}`)
