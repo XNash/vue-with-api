@@ -1,7 +1,7 @@
 <script>
 
 import axios from 'axios'
-const url = 'http://127.0.0.1:3000/users'
+const url = 'http://127.0.0.1:3000'
 
 export default{
   data() {
@@ -12,7 +12,7 @@ export default{
   },
   methods: {
     async getAllUsers() {
-      await axios.get(url).then((res) => {
+      await axios.get(`${url}/users`).then((res) => {
         this.users = res.data
       })
     },
