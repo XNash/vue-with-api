@@ -2,7 +2,7 @@
 import axios from "axios";
 import router from "@/routes/index.js";
 
-const url = 'http://127.0.0.1:3000/users'
+const url = 'http://127.0.0.1:3000'
 
 export default {
   name: "AddUser",
@@ -29,6 +29,8 @@ export default {
             id = parseInt(res.data.reverse()[0].id) + 1
             console.log(`User id: ${res.data.reverse()[0].id}`)
             this.localUser.id = id.toString()
+          }).catch(() => {
+            this.localUser.id = "0"
           })
     }
   },

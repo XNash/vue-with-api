@@ -11,6 +11,9 @@ export default{
     }
   },
   methods: {
+    async searchUser() {
+      
+    },
     async getAllUsers() {
       await axios.get(`${url}/users`).then((res) => {
         this.users = res.data
@@ -65,6 +68,7 @@ export default{
       <div class="col-md-2">
         <h1>Options</h1>
         <div class="row">
+          <input v-model="searchText" type="text" placeholder="Search by name..." />
           <router-link to="/list/add" class="btn btn-success mb-md-2">Add user</router-link>
           <button class="btn btn-primary" @click="importUsers">Import users</button>
         </div>
