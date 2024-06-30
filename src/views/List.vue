@@ -56,7 +56,7 @@ export default{
               <td>{{ user.id}}</td>
               <td>{{ user.name }}</td>
               <td>{{ user.email }}</td>
-              <td>
+              <td v-if="user.id">
                 <router-link :to="{name: 'EditUser', params: {id: user.id}}" class="btn btn-sm btn-primary">Edit</router-link>
                 <button class="btn btn-sm btn-danger" style="margin-left: 2px;" @click="handleDeleteUser(user.id)">Delete</button>
               </td>
